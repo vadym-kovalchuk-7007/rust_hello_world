@@ -2,7 +2,21 @@
 
 use std::ops::Range;
 
-const TOUCH_DOWN: u8 = 6;
+fn count_down(num: u8) {
+    if num == 0 {
+        println!("Is zero");
+    } else {
+        println!("{}", num);
+        count_down(num - 1);
+    }
+}
+
+fn factorial(num: u32) -> u32 {
+    if num == 1 {
+        return 1;
+    }
+    num * factorial(num - 1)
+}
 
 fn main() {
     let arr = [1, 2, 3];
@@ -15,6 +29,31 @@ fn main() {
     println!("{}", is_even(9));
     println!("{:?}", some_text_tup("abra"));
     println!("{:?}", some_text_tup("br"));
+    count_down(5);
+    println!("{}", color_to_number("green"));
+    println!("{}", factorial(5));
+    let mut cereals: [&str; 5] = [
+        "Cookie Crisp",
+        "Cinnamon Toast Crunch",
+        "Frosted Flakes",
+        "Cocoa Puffs",
+        "Captain Crunch",
+    ];
+    let first_two: &[&str] = &cereals[..2];
+    println!("{first_two:?}");
+    let mid_three: &[&str] = &cereals[1..4];
+    println!("{mid_three:?}");
+    let last_thee: &mut [&str] = &mut cereals[2..];
+    last_thee[2] = "Lucky Charms";
+    println!("{cereals:?}");
+    let cookie_crisp: String = String::from(cereals[0]);
+    println!("{cookie_crisp}");
+    let cookie: &str = &cookie_crisp[..6];
+    println!("{cookie}");
+    let cook_puffs: &String = &String::from(cereals[3]);
+    println!("{cook_puffs}");
+    let pufs: &str = &cook_puffs[6..];
+    println!("{pufs}");
 }
 
 fn apply_to_jobs(number: i32, title: &str) {
@@ -29,18 +68,12 @@ fn some_text_tup(text: &str) -> (bool, bool) {
     let has_b = text.contains("b");
     (has_a, has_b)
 }
-/*
-Define an alphabets function that accepts a 'text'
-parameter (an &str). The function should return a
-tuple of two Booleans. The first Boolean should check
-if the text contains the letter 'a'. The second
-Boolean should check if the text contains the letter
-'z'. You can use the 'contains' method to check if a
-string contains a specific character. See the documentation:
-https://doc.rust-lang.org/std/primitive.str.html#method.contains
 
-Examples:
-println!("{:?}", alphabets("aardvark")); -> (true, false)
-println!("{:?}", alphabets("zoology"));  -> (false, true)
-println!("{:?}", alphabets("zebra"));    -> (true, true)
-*/
+fn color_to_number(color: &str) -> u8 {
+    match color {
+        "red" => 1,
+        "green" => 2,
+        "blue" => 3,
+        _ => 0,
+    }
+}
