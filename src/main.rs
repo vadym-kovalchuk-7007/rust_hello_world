@@ -1,9 +1,5 @@
 #![allow(unused_variables)]
 
-mod references;
-
-use std::ops::Range;
-
 fn count_down(num: u8) {
     if num == 0 {
         println!("Is zero");
@@ -25,7 +21,7 @@ fn main() {
     let [one, two, three] = arr;
     let mut tpl = ("one", 22);
     tpl.1 = 23;
-    let s_range: Range<u8> = 1..32;
+    let s_range = 1..32;
     apply_to_jobs(12, "ddd");
     println!("{}", is_even(6));
     println!("{}", is_even(9));

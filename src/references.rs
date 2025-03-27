@@ -1,4 +1,4 @@
-fn main() {
+fn ex_1() {
     let mut cereals: [&str; 5] = [
         "Cookie Crisp",
         "Cinnamon Toast Crunch",
