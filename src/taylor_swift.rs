@@ -18,8 +18,9 @@ impl TaylorSwift {
         &self.title
     }
 
-    fn set_title(&mut self, title: String) {
+    fn set_title(&mut self, title: String) -> &mut Self {
         self.title = title;
+        self
     }
 }
 
