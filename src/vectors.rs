@@ -38,4 +38,12 @@ fn main() {
     } else {
         println!("No file found");
     }
+
+    //or
+    match folder.get_file(0) {
+        Some(f) => {
+            println!("Get file - {:#?}", f.name);
+        }
+        None => println!("No file found"),
+    }
 }
