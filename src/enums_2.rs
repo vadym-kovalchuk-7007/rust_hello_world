@@ -45,6 +45,20 @@ impl Laundry {
             _ => Err("Can't change delicate temp".to_string()),
         }
     }
+
+    fn change_delicate_program(&mut self, n_program: String) -> Result<String, String> {
+        match self {
+            Laundry::Delicate { program, temp } => {
+                let program = program.to_string();
+                *self = Laundry::Delicate {
+                    program: n_program.to_string(),
+                    temp: *temp,
+                };
+                Ok(program)
+            }
+            _ => Err("Can't change delicate program".to_string()),
+        }
+    }
 }
 
 fn main() {
@@ -54,13 +68,13 @@ fn main() {
         program: String::from("hand-wash"),
         temp: 35,
     };
-    l_cold.notify();
-    l_hot.notify();
-    l_delicate.notify();
+    l_cold.notify();//Starting  cold
+    l_hot.notify();//Starting  hot on temp:45
+    l_delicate.notify();//Starting Delicate on program:hand-wash with temp:35
 
     let res = l_hot.change_hot_temp(55);
-    println!("{res:?}");
-    l_hot.notify();
+    println!("{res:?}");//Ok(45)
+    l_hot.notify();//Starting  hot on temp:55
 
     let res_delicate_err = l_delicate.change_hot_temp(55);
     println!("{res_delicate_err:?}");
@@ -69,4 +83,25 @@ fn main() {
     println!("{res_delicate_err:?}");
     println!("{:?}", l_delicate.change_delicate_temp(40));
     l_delicate.notify();
+    let res_delicate_err = l_hot.change_delicate_program(String::from("baby-care"));
+    println!("{res_delicate_err:?}");
+    println!(
+        "{:?}",
+        l_delicate.change_delicate_program(String::from("baby-care"))
+    );
+    l_delicate.notify();
 }
+
+
+
+//  
+
+//
+//Err("Can't change")
+//Starting  Delicate on program:hand-wash with temp:35
+//Err("Can't change delicate temp")
+//Ok(35)
+//Starting  Delicate on program:hand-wash with temp:40
+//Err("Can't change delicate program")
+//Ok("hand-wash")
+//Starting  Delicate on program:baby-care with temp:40
